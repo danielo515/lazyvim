@@ -65,6 +65,7 @@ return {
   config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)
+    opts.defaults["<leader><Space>"] = nil
     wk.register(opts.defaults)
     wk.register(whichMaps, { prefix = "<leader>" })
   end,

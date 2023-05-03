@@ -5,5 +5,8 @@ return {
   opts = {
     suggestion = { enabled = true },
     panel = { enabled = true },
+    keymap = {
+      accept = "<C-E>",
+    },
   },
 }
