@@ -85,6 +85,17 @@ function D.fzf_find()
   end, context_completion)
 end
 
+function D.yank_file_name()
+  local path = vim.fn.expand("%:.")
+  vim.fn.setreg("*", path)
+  vim.notify(path .. " yanked to keyboard")
+end
+
+function D.yank_full_file_name()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("*", path)
+  vim.notify(path .. " yanked to keyboard")
+end
 --Better defaults and interfaces for vim commands
 D.vim = D.require("danielo.vim")
 D.file = D.require("danielo.file")

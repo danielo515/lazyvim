@@ -1,8 +1,14 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+require("danielo.globals")
 local nmap = require("user.keymap").nmap
 local vmap = require("user.keymap").vmap
+local del = vim.api.nvim_del_keymap
+del("n", "<leader>ww")
+del("n", "<leader>wd")
+del("n", "<leader>w-")
+del("n", "<leader>w|")
 nmap("<C-C>", function()
   vim.api.nvim_win_close(0, false)
 end, "Close current window")
@@ -19,8 +25,11 @@ nmap("<A-k>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<C-n>", ":Neotree focus<cr>", "Neotree focus", true)
 nmap("<C-f>", D.fzf_find, "Search then refine", true)
 nmap("<leader>w", ":wa<cr>", "Save all", true)
+nmap("<leader>fy", D.yank_file_name, "Yank current file path")
+nmap("<leader>fY", D.yank_full_file_name, "Yank full file path")
 nmap(",h", ":Gitsigns next_hunk<cr>", "Next git hunk")
 nmap(",c", ":cNext!<cr>", "Prev item in quickfix")
+nmap(",n", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next error")
 nmap(",s", ":s/\\v", "Search/replace local line", false)
 vmap(",s", ":s/\\v", "Search/replace local line", false)
 
