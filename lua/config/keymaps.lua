@@ -6,7 +6,9 @@ local vmap = require("user.keymap").vmap
 nmap("<C-C>", function()
   vim.api.nvim_win_close(0, false)
 end, "Close current window")
-nmap("<Tab>", ":Telescope buffers<cr>", "Open command center")
+nmap("<Tab>", function()
+  require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({}))
+end, "Open command center")
 nmap("<S-X>", function()
   require("mini.bufremove").delete(0, false)
 end, "Buffer delete")
@@ -15,7 +17,7 @@ nmap("<M-Tab>", ":b#<cr>", "Alternate file", true)
 nmap("<c-g>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<A-k>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<C-n>", ":Neotree focus<cr>", "Neotree focus", true)
-nmap("<C-f>", ":FzfLua lines<cr>", "Live grep  lines", true)
+nmap("<C-f>", D.fzf_find, "Search then refine", true)
 nmap("<leader>w", ":wa<cr>", "Save all", true)
 nmap(",h", ":Gitsigns next_hunk<cr>", "Next git hunk")
 nmap(",c", ":cNext!<cr>", "Prev item in quickfix")
@@ -24,7 +26,6 @@ vmap(",s", ":s/\\v", "Search/replace local line", false)
 
 -- Navigation
 vim.keymap.set("n", "s", ":Pounce<CR>", { noremap = true, silent = true, desc = "Extend visual selection with Pounce" })
-
 vim.keymap.set(
   "n",
   "<M-f>",
