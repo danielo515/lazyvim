@@ -1,6 +1,5 @@
 local whichMaps = {
   ["<space>"] = { ":Telescope command_history<cr>", "Command history" },
-  u = { ":Neotree float reveal<cr>", "Open floating file explorer" },
   -- extend search
   s = {
     d = { "<cmd>lua require('user.telescope').dotfiles()<cr>", "Search dotfiles" },
@@ -43,8 +42,6 @@ local whichMaps = {
     -- f = { require("lvim.core.telescope.custom-finders").find_project_files, "Find project files" },
     f = { "<cmd>FzfLua files<cr>", "Find project files" },
     g = { "<cmd>FzfLua lines<cr>", "Search on open files" },
-    y = { "<cmd>lua Yank_file_name()<CR>", "Yank current file path" },
-    Y = { "<cmd>lua Yank_full_file_name()<CR>", "Yank full file path" },
   },
   -- Contextual section. This will be filled from filetype functions
   x = {
@@ -66,7 +63,10 @@ return {
     local wk = require("which-key")
     wk.setup(opts)
     opts.defaults["<leader><Space>"] = nil
+    opts.defaults["<leader><tab>"] = nil
+    opts.defaults["<leader>w"] = nil
     wk.register(opts.defaults)
+    vim.print(opts.defaults)
     wk.register(whichMaps, { prefix = "<leader>" })
   end,
 }
