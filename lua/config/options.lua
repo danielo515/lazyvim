@@ -22,3 +22,4 @@ vim.filetype.add({
     [".*/etc/foo/.*"] = "fooscript",
   },
 })
+vim.o.winbar = "%{%v:lua.require'user.winbar'.statusline()%}"
