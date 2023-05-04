@@ -4,6 +4,15 @@ return {
   cmd = "Telescope",
   version = false, -- telescope did only one release, so use HEAD for now
   keys = {
+
+    -- add a keymap to browse plugin files
+    {
+      "<leader>fp",
+      function()
+        require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+      end,
+      desc = "Find Plugin File",
+    },
     { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -19,8 +28,8 @@ return {
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+    -- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+    -- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
     -- search
     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
@@ -79,6 +88,10 @@ return {
   },
   opts = {
     defaults = {
+      layout_strategy = "horizontal",
+      layout_config = { prompt_position = "top" },
+      sorting_strategy = "ascending",
+      winblend = 0,
       prompt_prefix = " ",
       selection_caret = " ",
       mappings = {
