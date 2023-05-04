@@ -17,3 +17,10 @@ command("BufWritePost", {
     chezmoi.executeChezmoi({ "apply", "-v", "--refresh-externals=false", "--source-path", file })
   end,
 })
+
+command("FileType", {
+  pattern = "reason",
+  callback = function()
+    vim.cmd("setlocal commentstring=//%s")
+  end,
+})
