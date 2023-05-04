@@ -13,6 +13,13 @@ return {
       end,
       desc = "Find Plugin File",
     },
+    {
+      "<leader>sp",
+      function()
+        require("telescope.builtin").live_grep({ cwd = require("lazy.core.config").options.root })
+      end,
+      desc = "Search in plugin files",
+    },
     { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
     { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -27,9 +34,6 @@ return {
     },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
-    -- git
-    -- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-    -- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
     -- search
     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
