@@ -4,7 +4,9 @@
 require("danielo.globals")
 local nmap = require("user.keymap").nmap
 local vmap = require("user.keymap").vmap
-local del = vim.api.nvim_del_keymap
+local del = function(...)
+  return pcall(vim.api.nvim_del_keymap, ...)
+end
 del("n", "<leader>ww")
 del("n", "<leader>wd")
 del("n", "<leader>w-")
@@ -12,12 +14,23 @@ del("n", "<leader>w|")
 nmap("<C-C>", function()
   vim.api.nvim_win_close(0, false)
 end, "Close current window")
+
 nmap("<Tab>", function()
-  require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({}))
-end, "Open command center")
+  require("telescope.builtin").buffers({
+
+    layout_strategy = "vertical",
+    layout_config = { height = 0.65, mirror = true, prompt_position = "top", anchor = "N" },
+  })
+end, "Open buffers in telescope")
+
+nmap("<S-Tab>", function()
+  require("telescope.builtin").find_files()
+end, "Find finles telescope")
+
 nmap("<S-X>", function()
   require("mini.bufremove").delete(0, false)
-end, "Buffer delete")
+end, "Close current buffer")
+
 nmap("<C-s>", ":%s/\\v", "Search and replace whole file", false)
 nmap("<M-Tab>", ":b#<cr>", "Alternate file", true)
 nmap("<c-g>", ":cnext!<cr>", "Next in quickfix", true)
