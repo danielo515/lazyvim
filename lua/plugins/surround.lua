@@ -21,11 +21,11 @@ return {
   opts = {
     mappings = {
       add = "ys",
-      delete = "gsd",
+      delete = "ds",
       find = "gsf",
       find_left = "gsF",
       highlight = "gsh",
-      replace = "gsr",
+      replace = "cs",
       update_n_lines = "gsn",
     },
   },
