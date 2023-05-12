@@ -11,6 +11,7 @@ vim.filetype.add({
     mdx = "markdown",
     re = "reason",
     rei = "reason",
+    hx = "haxe",
   },
   filename = {
     ["kitty.conf"] = "kitty",
