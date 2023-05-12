@@ -60,8 +60,6 @@ local map = vim.keymap.set;
 -- Normal mode mappings
 map("n", "<S-l>", ":BufferLineCycleNext<CR>", { desc = "Cycle to next buffer" })
 map("n", "<S-h>", ":BufferLineCyclePrev<CR>", { desc = "Cycle to previous buffer" })
-map("n", "<C-F>", "<cmd>lua require('user.find').fzf_find()<cr>", { desc = "Find files using FZF" })
-map("n", "<S-X>", "<cmd>BufferKill<cr>", { desc = "Close the current buffer" })
 map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename symbol using LSP" })
 map("n", "<M-cr>", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Trigger LSP code action" })
 map("n", "<M-f>", "<cmd>lua require('fzf-lua').files()<cr>", { desc = "Find files using FZF-Lua" })
