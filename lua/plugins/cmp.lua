@@ -10,6 +10,7 @@ return {
         keyword_length = 4,
         max_item_count = 5,
         priority_weight = 60,
+        group_index = 1,
         option = {
           additional_arguments = "--smart-case --hidden",
         },
@@ -27,5 +28,6 @@ return {
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     }
+    vim.print(opts)
   end,
 }
