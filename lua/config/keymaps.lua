@@ -45,7 +45,6 @@ end, "Close current buffer")
 
 nmap("<C-s>", ":%s/\\v", "Search and replace whole file", false)
 nmap("<M-Tab>", ":b#<cr>", "Alternate file", true)
-nmap("<c-g>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<A-k>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<C-n>", ":Neotree focus<cr>", "Neotree focus", true)
 nmap("<C-f>", D.fzf_find, "Search then refine", true)
