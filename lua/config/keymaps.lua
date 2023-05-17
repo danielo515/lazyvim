@@ -5,12 +5,14 @@ require("danielo.globals")
 local nmap = require("user.keymap").nmap
 local vmap = require("user.keymap").vmap
 local del = function(...)
-  return pcall(del, ...)
+  return pcall(vim.keymap.del, ...)
 end
 del("n", "<leader>ww")
 del("n", "<leader>wd")
 del("n", "<leader>w-")
 del("n", "<leader>w|")
+del("n", "<leader>-")
+del("n", "<leader>|")
 
 --Cleanups
 del("i", "jj")

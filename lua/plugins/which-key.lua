@@ -56,6 +56,13 @@ return {
   event = "VeryLazy",
   opts = {
     plugins = { spelling = true },
+    defaults = {
+      ["<leader>w"] = { name = "Save all" },
+      ["<leader>ww"] = false,
+      ["<leader>wd"] = false,
+      ["<leader>w-"] = false,
+      ["<leader>w|"] = false,
+    }
   },
   config = function(_, opts)
     local wk = require("which-key")
@@ -63,7 +70,7 @@ return {
     opts.defaults["<leader><Space>"] = nil
     opts.defaults["<leader><tab>"] = nil
     opts.defaults["<leader>w"] = nil
-    wk.register(opts.defaults)
+    -- wk.register(opts.defaults)
     vim.print(opts.defaults)
     wk.register(whichMaps, { prefix = "<leader>" })
   end,
