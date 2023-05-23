@@ -5,7 +5,9 @@ return {
     {
       "<cr>",
       function()
-        require("zen-mode").toggle()
+        if vim.bo.buftype ~= "quickfix" then
+          require("zen-mode").toggle()
+        end
       end,
 
       { desc = "Toggle zen mode", silent = true },
@@ -19,7 +21,7 @@ return {
       -- * a percentage of the width / height of the editor when <= 1
       -- * a function that returns the width or the height
       width = 0.7, -- width of the Zen window
-      height = 1, -- height of the Zen window
+      height = 1,  -- height of the Zen window
       -- by default, no options are changed for the Zen window
       -- uncomment any of the options below, or add other vim.wo options you want to apply
       options = {
@@ -37,12 +39,12 @@ return {
       -- comment the lines to not apply the options
       options = {
         enabled = true,
-        ruler = false, -- disables the ruler text in the cmd line area
-        showcmd = false, -- disables the command in the last line of the screen
+        ruler = false,                -- disables the ruler text in the cmd line area
+        showcmd = false,              -- disables the command in the last line of the screen
       },
       twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
       gitsigns = { enabled = false }, -- disables git signs
-      tmux = { enabled = false }, -- disables the tmux statusline
+      tmux = { enabled = false },     -- disables the tmux statusline
       -- this will change the font size on kitty when in zen mode
       -- to make this work, you need to set the following kitty options:
       -- - allow_remote_control socket-only
@@ -53,8 +55,10 @@ return {
       },
     },
     -- callback where you can add custom code when the Zen window opens
-    on_open = function(win) end,
+    on_open = function(win)
+    end,
     -- callback where you can add custom code when the Zen window closes
-    on_close = function() end,
+    on_close = function()
+    end,
   },
 }
