@@ -13,6 +13,7 @@ return {
           let g:asynctask_template = '~/.config/lvim/task_template.ini'
           let g:asynctasks_extra_config = ['~/.config/lvim/tasks.ini']
           ]])
+      vim.keymap.set('n', '<F5>', '<cmd>AsyncTask project-build<cr>', { noremap = true, silent = true })
     end,
   },
 }
