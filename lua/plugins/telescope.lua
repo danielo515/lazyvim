@@ -27,6 +27,7 @@ return {
     -- find
     { "<leader>fb",      "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
     { "<leader>ff",      Util.telescope("files"),                            desc = "Find Files (root dir)" },
+    { "<leader>fs",      Util.telescope("git_status"),                       desc = "Git status files" },
     {
       "<leader>fF",
       Util.telescope("files", { cwd = false, hidden = true, no_ignore = true }),
@@ -123,6 +124,12 @@ return {
           ["<C-b>"] = function(...)
             return require("telescope.actions").preview_scrolling_up(...)
           end,
+          ["<C-h>"] = function(...)
+            return require("telescope.actions").which_key(...)
+          end,
+          ["<C-w>"] = function(...)
+            return require("telescope.actions").smart_add_to_loclist(...)
+          end,
         },
         n = {
           ["q"] = function(...)
@@ -130,6 +137,12 @@ return {
           end,
           ["x"] = function(...)
             return require("telescope.actions").delete_buffer(...)
+          end,
+          ["<c-h>"] = function(...)
+            return require("telescope.actions").which_key(...)
+          end,
+          ["<C-w>"] = function(...)
+            return require("telescope.actions").smart_add_to_loclist(...)
           end,
         },
       },
