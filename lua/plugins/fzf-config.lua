@@ -35,6 +35,7 @@ local function add_extensions()
         end
       end,
     })
+  -- Allows to use fzf to search in the entire git history
   vim.api.nvim_create_user_command('GitLiveGrep', function()
     require 'fzf-lua'.fzf_live(
       "git rev-list --all | xargs git grep --line-number --column --color=always <query>",
@@ -48,6 +49,21 @@ local function add_extensions()
       }
     )
   end, { desc = "live grep entire git history" })
+
+  -- Optional command center registration
+  pcall(function()
+    local command_center = require("command_center")
+    command_center.add({
+      {
+        desc = "Live grep git commits",
+        cmd = "<CMD>GitLiveGrep<CR>",
+      },
+      {
+        desc = "List files from main branch",
+        cmd = "<CMD>ListFilesFromBranch main<CR>",
+      },
+    }, { mode = command_center.mode.ADD })
+  end)
 end
 
 return {
@@ -135,10 +151,8 @@ return {
           },
         },
         on_create = function()
-          -- called once upon creation of the fzf main window
-          -- can be used to add custom fzf-lua mappings, e.g:
-          --   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Down>",
-          --     { silent = true, noremap = true })
+          -- FZF lua runs in terminal mode, that's why we use the 't'
+          vim.api.nvim_buf_set_keymap(0, "t", "<Esc>", "<Esc>", { noremap = true })
         end,
       },
       keymap = {
