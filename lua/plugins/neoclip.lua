@@ -44,6 +44,6 @@ return {
     end
     whk.register({
       ["<leader>y"] = { clip, "neoclip: open yank history" },
-    })
+    }, { mode = { "n", "v" } })
   end,
 }
