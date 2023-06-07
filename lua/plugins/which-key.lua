@@ -28,6 +28,7 @@ local whichMaps = {
     S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     s = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage file" },
     B = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Toggle blame" },
+    b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame curent line" },
     d = { "<cmd>DiffviewOpen<cr>", "Open git diff" },
     h = { "<cmd>DiffviewFileHistory %<cr>", "Open file history" },
     H = { "<cmd>DiffviewFileHistory<cr>", "Open file history for current branch" },
