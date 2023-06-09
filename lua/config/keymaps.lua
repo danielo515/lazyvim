@@ -44,6 +44,7 @@ nmap("<S-X>", function()
 end, "Close current buffer")
 
 nmap("<C-s>", ":%s/\\v", "Search and replace whole file", false)
+nmap("<C-q>", "<cmd>ccl<cr>", "Close quick fix list", false)
 nmap("<M-Tab>", ":b#<cr>", "Alternate file", true)
 nmap("<A-k>", ":cnext!<cr>", "Next in quickfix", true)
 nmap("<C-n>", ":Neotree focus<cr>", "Neotree focus", true)
@@ -58,6 +59,7 @@ nmap(",c", ":cNext!<cr>", "Prev item in quickfix")
 nmap(",n", "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next error")
 nmap(",s", ":s/\\v", "Search/replace local line", false)
 vmap(",s", ":s/\\v", "Search/replace local line", false)
+vmap(",rt", require("danielo.replace-snippets").objectTypeToDestructure, "replace object type to destructure", false)
 
 local map = vim.keymap.set;
 -- Normal mode mappings
@@ -82,7 +84,8 @@ map("v", "<M-cr>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { noremap = t
 map("v", "p", '"_dP', { noremap = true, silent = true })
 
 -- Insert mode mappings
-map("i", "<C-f>", "<cmd>lua require('user.find').fzf_find()<cr>", { noremap = true, silent = true })
+map("i", "<C-f>", "<cmd>lua require('user.find').fzf_find()<cr>",
+  { noremap = true, silent = true, desc = "My custom find using fzf" })
 map("i", "<C-u>", "<cmd>lua require('luasnip.extras.select_choice')()<cr>", { noremap = true, silent = true })
 
 -- Navigation

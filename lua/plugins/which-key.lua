@@ -66,7 +66,7 @@ local whichMaps = {
     r = { "viwP", "Replace word with clipboard content" },
   },
   ["?"] = { "<cmd>Cheat<CR>", " Cheat.sh" },
-  r = require("danielo.replace-snippets").r,
+  r = require("danielo.replace-snippets").keymap.r,
 }
 
 return {

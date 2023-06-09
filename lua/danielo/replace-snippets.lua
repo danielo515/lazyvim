@@ -44,4 +44,6 @@ keymap["r"]["T"] = {
   "object [T]ype to destructured",
 }
 
-return keymap;
+M.keymap = keymap;
+
+return M;
