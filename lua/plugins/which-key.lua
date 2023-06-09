@@ -9,6 +9,21 @@ local whichMaps = {
     j = { "<cmd>Telescope jumplist<cr>", "Jump list" },
     o = { "<cmd>FzfLua lines<cr>", "Grep lines on open files" },
     ["."] = { "<cmd>Telescope resume<cr>", "Repeat search" },
+    K = {
+      name = 'Keymaps by mode',
+      i = {
+        function()
+          require('telescope.builtin').keymaps({ modes = { 'i' } })
+        end,
+        "insert mode keymaps"
+      },
+      n = {
+        function()
+          require('telescope.builtin').keymaps({ modes = { 'n' } })
+        end,
+        "normal mode keymaps"
+      }
+    },
     S = {
       "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
       "Spectre search",
@@ -51,7 +66,9 @@ local whichMaps = {
     r = { "viwP", "Replace word with clipboard content" },
   },
   ["?"] = { "<cmd>Cheat<CR>", " Cheat.sh" },
+  r = require("danielo.replace-snippets").r,
 }
+
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -67,11 +84,12 @@ return {
   },
   config = function(_, opts)
     local wk = require("which-key")
-    wk.setup(opts)
     opts.defaults["<leader><Space>"] = nil
     opts.defaults["<leader><tab>"] = nil
     opts.defaults["<leader>w"] = nil
+    opts.defaults["<leader>gh"] = nil
     -- wk.register(opts.defaults)
+    wk.setup(opts)
     vim.print(opts.defaults)
     wk.register(whichMaps, { prefix = "<leader>" })
   end,
