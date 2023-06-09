@@ -37,6 +37,7 @@ return {
     { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }),     desc = "Recent (cwd)" },
     -- search
     { "<leader>sa", "<cmd>Telescope autocommands<cr>",                        desc = "Auto Commands" },
+    { "<leader>sv", "<cmd>Telescope vim_options<cr>",                         desc = "Vim options" },
     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",           desc = "Buffer" },
     { "<leader>sc", "<cmd>Telescope commands<cr>",                            desc = "Commands" },
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",                 desc = "Document diagnostics" },
@@ -91,6 +92,13 @@ return {
     },
   },
   opts = {
+    pickers = {
+      buffers = {
+        ignore_current_buffer = true,
+        sort_lastused = true,
+        sort_mru = true,
+      },
+    },
     defaults = {
       layout_strategy = "horizontal",
       layout_config = { prompt_position = "top" },
