@@ -19,6 +19,7 @@ vim.filetype.add({
 return {
   "echasnovski/mini.surround",
   opts = {
+    n_lines = 90, -- Number of lines within which surrounding is searched,
     mappings = {
       add = "ys",
       delete = "ds",
