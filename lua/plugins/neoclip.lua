@@ -10,7 +10,7 @@ return {
       db_path = vim.fn.stdpath("data") .. "/neoclip.sqlite3",
       keys = {
         telescope = {
-          i = { select = "<c-p>", paste = "<CR>", paste_behind = "<c-k>" },
+          i = { select = "<tab>", paste = "<c-p>", paste_behind = "<cr>" },
           n = { select = "p", paste = "<CR>", paste_behind = "P" },
         },
       },
