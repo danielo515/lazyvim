@@ -30,7 +30,7 @@ return {
     { "<leader>fs",      Util.telescope("git_status"),                       desc = "Git status files" },
     {
       "<leader>fF",
-      Util.telescope("files", { cwd = false, hidden = true, no_ignore = true }),
+      function() require('telescope.builtin').find_files({ cwd = false, hidden = true, no_ignore = false }) end,
       desc = "Find all Files (cwd)",
     },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                            desc = "Recent" },

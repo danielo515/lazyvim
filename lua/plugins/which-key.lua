@@ -53,8 +53,6 @@ local whichMaps = {
   -- file section
   f = {
     name = "Files",
-    -- f = { require("lvim.core.telescope.custom-finders").find_project_files, "Find project files" },
-    f = { "<cmd>FzfLua files<cr>", "Find project files" },
     g = { "<cmd>FzfLua lines<cr>", "Search on open files" },
   },
   -- Contextual section. This will be filled from filetype functions
