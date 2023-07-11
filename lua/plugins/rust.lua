@@ -49,84 +49,98 @@ return {
     end,
   },
 
-  -- correctly setup lspconfig
+  {
+    "simrat39/rust-tools.nvim",
+    lazy = true,
+    opts = function()
+      local ok, mason_registry = pcall(require, "mason-registry")
+      local adapter ---@type any
+      if ok then
+        -- rust tools configuration for debugging support
+        local codelldb = mason_registry.get_package("codelldb")
+        local extension_path = codelldb:get_install_path() .. "/extension/"
+        local codelldb_path = extension_path .. "adapter/codelldb"
+        local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
+            or extension_path .. "lldb/lib/liblldb.so"
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+      end
+      return {
+        dap = {
+          adapter = adapter,
+        },
+        tools = {
+          on_initialized = function()
+            vim.cmd([[
+                  augroup RustLSP
+                    autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+                    autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+                    autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+                  augroup END
+                ]])
+          end,
+        },
+      }
+    end,
+    config = function() end,
+  },
+
+  -- Correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "simrat39/rust-tools.nvim" },
     opts = {
-      -- make sure mason installs the server
-      setup = {
-        rust_analyzer = function(_, opts)
-          require("lazyvim.util").on_attach(function(client, buffer)
-            -- stylua: ignore
-            if client.name == "rust_analyzer" then
-              vim.keymap.set("n", "K", "<CMD>RustHoverActions<CR>", { buffer = buffer })
-              vim.keymap.set("n", "<leader>ct", "<CMD>RustDebuggables<CR>", { buffer = buffer, desc = "Run Test" })
-            end
-          end)
-          local mason_registry = require("mason-registry")
-          local rust_tools_opts = {
-            tools = {
-              hover_actions = {
-                auto_focus = false,
-                border = "none",
+      servers = {
+        -- Ensure mason installs the server
+        rust_analyzer = {
+          keys = {
+            { "K",          "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
+            { "<leader>cR", "<cmd>RustCodeAction<cr>",   desc = "Code Action (Rust)" },
+            { "<leader>dr", "<cmd>RustDebuggables<cr>",  desc = "Run Debuggables (Rust)" },
+          },
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                allFeatures = true,
+                loadOutDirsFromCheck = true,
+                runBuildScripts = true,
               },
-              inlay_hints = {
-                auto = false,
-                show_parameter_hints = true,
+              -- Add clippy lints for Rust.
+              checkOnSave = {
+                allFeatures = true,
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+              },
+              procMacro = {
+                enable = true,
+                ignored = {
+                  ["async-trait"] = { "async_trait" },
+                  ["napi-derive"] = { "napi" },
+                  ["async-recursion"] = { "async_recursion" },
+                },
               },
             },
-            server = vim.tbl_deep_extend("force", opts, {
-              settings = {
-                ["rust-analyzer"] = {
-                  cargo = {
-                    features = "all",
-                  },
-                  -- Add clippy lints for Rust.
-                  checkOnSave = true,
-                  check = {
-                    command = "clippy",
-                    features = "all",
-                  },
-                  procMacro = {
-                    enable = true,
-                  },
-                }
-              }
-            })
-          }
-          if mason_registry.has_package("codelldb") then
-            -- rust tools configuration for debugging support
-            local codelldb = mason_registry.get_package("codelldb")
-            local extension_path = codelldb:get_install_path() .. '/extension/'
-            local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = vim.fn.has "mac" == 1 and extension_path .. 'lldb/lib/liblldb.dylib' or
-                extension_path .. 'lldb/lib/liblldb.so'
-            rust_tools_opts = vim.tbl_deep_extend("force", rust_tools_opts, {
-              dap = {
-                adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-              },
-            })
-          end
-          require("rust-tools").setup(rust_tools_opts)
+          },
+        },
+        taplo = {
+          keys = {
+            {
+              "K",
+              function()
+                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+                  require("crates").show_popup()
+                else
+                  vim.lsp.buf.hover()
+                end
+              end,
+              desc = "Show Crate Documentation",
+            },
+          },
+        },
+      },
+      setup = {
+        rust_analyzer = function(_, opts)
+          local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
+          require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
           return true
-        end,
-        taplo = function(_, _)
-          local crates = require('crates')
-          local function show_documentation()
-            if vim.fn.expand('%:t') == 'Cargo.toml' and crates.popup_available() then
-              crates.show_popup()
-            else
-              vim.lsp.buf.hover()
-            end
-          end
-          require("lazyvim.util").on_attach(function(client, buffer)
-            -- stylua: ignore
-            if client.name == "taplo" then
-              vim.keymap.set("n", "K", show_documentation, { buffer = buffer })
-            end
-          end)
-          return false -- make sure the base implementation calls taplo.setup
         end,
       },
     },
