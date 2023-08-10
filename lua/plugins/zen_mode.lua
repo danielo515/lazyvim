@@ -1,3 +1,4 @@
+local ignored_filetypes = { "toggleterm", "NvimTree", "packer", "dashboard", "quickfix" }
 return {
   "folke/zen-mode.nvim",
   lazy = false,
@@ -5,7 +6,7 @@ return {
     {
       "<cr>",
       function()
-        if vim.bo.buftype ~= "quickfix" then
+        if not vim.tbl_contains(ignored_filetypes, vim.bo.filetype) then
           require("zen-mode").toggle()
         end
       end,
@@ -50,7 +51,7 @@ return {
       -- - allow_remote_control socket-only
       -- - listen_on unix:/tmp/kitty
       kitty = {
-        enabled = false,
+        enabled = true,
         font = "+4", -- font size increment
       },
     },

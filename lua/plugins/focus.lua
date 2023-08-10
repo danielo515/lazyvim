@@ -17,6 +17,7 @@ return {
       cursorcolumn = false,
       colorcolumn = { enable = true, width = 100 },
       absolutenumber_unfocussed = true,
+      excluded_filetypes = { "toggleterm" },
       winhighlight = false,
     })
     vim.cmd("hi link UnfocusedWindow CursorLineSign")
