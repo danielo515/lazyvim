@@ -6,7 +6,7 @@ return {
     table.insert(opts.sections.lualine_x, "searchcount")
     opts.sections.lualine_z = {
       function()
-        return vim.api.nvim_buf_line_count(0)
+        return (vim.fn.getcwd() .. " | " .. vim.api.nvim_buf_line_count(0))
       end,
     }
   end,
