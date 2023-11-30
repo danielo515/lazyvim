@@ -1,6 +1,6 @@
 return {
   "beauwilliams/focus.nvim",
-  keys = { "<CR>" },
+  enable = false,
   config = function()
     require("focus").setup({
       autoresize = false,

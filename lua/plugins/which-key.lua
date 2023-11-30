@@ -10,19 +10,19 @@ local whichMaps = {
     o = { "<cmd>FzfLua lines<cr>", "Grep lines on open files" },
     ["."] = { "<cmd>Telescope resume<cr>", "Repeat search" },
     K = {
-      name = 'Keymaps by mode',
+      name = "Keymaps by mode",
       i = {
         function()
-          require('telescope.builtin').keymaps({ modes = { 'i' } })
+          require("telescope.builtin").keymaps({ modes = { "i" } })
         end,
-        "insert mode keymaps"
+        "insert mode keymaps",
       },
       n = {
         function()
-          require('telescope.builtin').keymaps({ modes = { 'n' } })
+          require("telescope.builtin").keymaps({ modes = { "n" } })
         end,
-        "normal mode keymaps"
-      }
+        "normal mode keymaps",
+      },
     },
     S = {
       "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
@@ -78,7 +78,7 @@ return {
       ["<leader>wd"] = false,
       ["<leader>w-"] = false,
       ["<leader>w|"] = false,
-    }
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
@@ -88,7 +88,6 @@ return {
     opts.defaults["<leader>gh"] = nil
     -- wk.register(opts.defaults)
     wk.setup(opts)
-    vim.print(opts.defaults)
     wk.register(whichMaps, { prefix = "<leader>" })
   end,
 }

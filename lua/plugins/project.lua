@@ -1,12 +1,12 @@
 return {
   "ahmedkhalf/project.nvim",
   config = function()
-    require("project_nvim").setup {
+    require("project_nvim").setup({
       patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
       -- Don't calculate root dir on specific directories
       -- Ex: { "~/.cargo/*", ... }
       exclude_dirs = {
-        "~/.local/share/chezmoi/*"
+        "~/.local/share/chezmoi/*",
       },
 
       -- Show hidden files in telescope
@@ -20,7 +20,8 @@ return {
       -- * global (default)
       -- * tab
       -- * win
-      scope_chdir = 'global',
-    }
+      scope_chdir = "global",
+      manual_mode = true,
+    })
   end,
 }
