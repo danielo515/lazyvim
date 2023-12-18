@@ -61,7 +61,14 @@ nmap(",s", ":s/\\v", "Search/replace local line", false)
 vmap(",s", ":s/\\v", "Search/replace local line", false)
 vmap(",rt", require("danielo.replace-snippets").objectTypeToDestructure, "replace object type to destructure", false)
 
-local map = vim.keymap.set;
+local map = function(mode, key, cmd, opts)
+  opts = opts or {}
+  opts.noremap = opts.noremap == nil and true or opts.noremap
+  opts.silent = opts.silent == nil and true or opts.silent
+  opts.desc = opts.desc or ""
+  vim.keymap.set(mode, key, cmd, opts)
+end
+
 -- Normal mode mappings
 map("n", "<S-l>", ":BufferLineCycleNext<CR>", { desc = "Cycle to next buffer" })
 map("n", "<S-h>", ":BufferLineCyclePrev<CR>", { desc = "Cycle to previous buffer" })
@@ -84,8 +91,12 @@ map("v", "<M-cr>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", { noremap = t
 map("v", "p", '"_dP', { noremap = true, silent = true })
 
 -- Insert mode mappings
-map("i", "<C-f>", "<cmd>lua require('user.find').fzf_find()<cr>",
-  { noremap = true, silent = true, desc = "My custom find using fzf" })
+map(
+  "i",
+  "<C-f>",
+  "<cmd>lua require('user.find').fzf_find()<cr>",
+  { noremap = true, silent = true, desc = "My custom find using fzf" }
+)
 map("i", "<C-u>", "<cmd>lua require('luasnip.extras.select_choice')()<cr>", { noremap = true, silent = true })
 
 -- Navigation
