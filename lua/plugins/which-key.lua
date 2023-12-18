@@ -70,6 +70,7 @@ local whichMaps = {
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  dependencies = { "legendary.nvim" },
   opts = {
     plugins = { spelling = true },
     defaults = {
