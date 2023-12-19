@@ -1,5 +1,6 @@
 local whichMaps = {
   ["<space>"] = { ":Telescope command_history<cr>", "Command history" },
+  c = { name = "code" },
   -- extend search
   s = {
     d = { "<cmd>lua require('user.telescope').dotfiles()<cr>", "Search dotfiles" },
@@ -63,7 +64,6 @@ local whichMaps = {
     p = { "ysiw(", "Surryound word with parens" },
     r = { "viwP", "Replace word with clipboard content" },
   },
-  ["?"] = { "<cmd>Cheat<CR>", " Cheat.sh" },
   r = require("danielo.replace-snippets").keymap.r,
 }
 
