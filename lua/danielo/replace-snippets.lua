@@ -17,9 +17,16 @@ keymap["r"]["t"] = {
 
 keymap["r"]["i"] = {
   function()
-    D.vim.send_keys(':%s/\v"[^"]*"/ String/g' .. string.rep("<Left>", 5))
+    D.vim.send_keys(':%s/\\v"[^"]*"/ String/g' .. string.rep("<Left>", 5))
   end,
-  "literal str[i]ng to type",
+  "literal str[i]ng to String type",
+}
+
+keymap["r"]["w"] = {
+  function()
+    D.vim.send_keys(":%s/\\v<C-R><C-W>//g" .. string.rep("<Left>", 2))
+  end,
+  "replace current [w]ord",
 }
 
 keymap["r"]["r"] = {
@@ -44,6 +51,6 @@ keymap["r"]["T"] = {
   "object [T]ype to destructured",
 }
 
-M.keymap = keymap;
+M.keymap = keymap
 
-return M;
+return M
