@@ -2,6 +2,7 @@ return {
   "reasonml-editor/vim-reason-plus",
   {
     "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
     opts = {
       servers = {
 
