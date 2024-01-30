@@ -24,6 +24,6 @@ return {
       },
     },
 
-    -- see below for full list of options 👇
+    log_level = vim.log.levels.ERROR,
   },
 }
