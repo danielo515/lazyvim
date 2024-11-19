@@ -7,6 +7,7 @@ return {
       -- Ex: { "~/.cargo/*", ... }
       exclude_dirs = {
         "~/.local/share/chezmoi/*",
+        "~/GIT/dharma-world/*",
       },
 
       -- Show hidden files in telescope

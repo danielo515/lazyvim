@@ -15,16 +15,14 @@ return {
         option = {
           additional_arguments = "--smart-case --hidden",
         },
-      }
-      ,
+      },
       {
         name = "tmux",
         group_index = 1,
         max_item_count = 5,
         option = { all_panes = true, label = "[tmux]" },
-        priority_weight = 50
+        priority_weight = 50,
       },
-
     }
     vim.list_extend(opts.sources, sources)
     local format = opts.formatting.format
@@ -42,14 +40,14 @@ return {
       select_next_item = {
         c = function(fallback)
           if cmp.visible() then
-            return cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert } (fallback)
+            return cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })(fallback)
           else
-            return cmp.mapping.complete { reason = cmp.ContextReason.Auto } (fallback)
+            return cmp.mapping.complete({ reason = cmp.ContextReason.Auto })(fallback)
           end
         end,
       },
       select_prev_item = {
-        c = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
       },
     }
     -- cmp.setup.cmdline("/", {
@@ -63,6 +61,5 @@ return {
     --   },
     --   sources = cmp.config.sources({ { name = "buffer" }, }, { { name = "cmdline_history" }, }),
     -- })
-    vim.print(opts)
   end,
 }

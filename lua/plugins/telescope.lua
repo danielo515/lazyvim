@@ -21,13 +21,13 @@ return {
       desc = "Search in plugin files",
     },
     { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-    { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+    { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (root dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader><space>", Util.telescope("command_history"), desc = "Command history" },
+    { "<leader><space>", LazyVim.pick("command_history"), desc = "Command history" },
     -- find
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-    { "<leader>fs", Util.telescope("git_status"), desc = "Git status files" },
+    { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (root dir)" },
+    { "<leader>fs", LazyVim.pick("git_status"), desc = "Git status files" },
     {
       "<leader>fF",
       function()
@@ -36,7 +36,7 @@ return {
       desc = "Find all Files (cwd)",
     },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
+    { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
     {
       "<leader>f.",
       function()
@@ -52,7 +52,7 @@ return {
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
     { "<leader>sg", "<cmd>Telescope live_grep_args<cr>", desc = "Live grep args" },
-    { "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+    { "<leader>sG", LazyVim.pick("live_grep", { cwd = false }), desc = "Grep (cwd)" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -60,12 +60,12 @@ return {
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-    { "<leader>sw", Util.telescope("grep_string"), desc = "Word (root dir)" },
-    { "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
-    { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+    { "<leader>sw", LazyVim.pick("grep_string"), desc = "Word (root dir)" },
+    { "<leader>sW", LazyVim.pick("grep_string", { cwd = false }), desc = "Word (cwd)" },
+    { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
     {
       "<leader>ss",
-      Util.telescope("lsp_document_symbols", {
+      LazyVim.pick("lsp_document_symbols", {
         symbols = {
           "Class",
           "Function",
@@ -83,7 +83,7 @@ return {
     },
     {
       "<leader>sS",
-      Util.telescope("lsp_dynamic_workspace_symbols", {
+      LazyVim.pick("lsp_dynamic_workspace_symbols", {
         symbols = {
           "Class",
           "Function",
@@ -124,10 +124,10 @@ return {
             return require("trouble.providers.telescope").open_selected_with_trouble(...)
           end,
           ["<a-i>"] = function()
-            Util.telescope("find_files", { no_ignore = true })()
+            LazyVim.pick("find_files", { no_ignore = true })()
           end,
           ["<a-h>"] = function()
-            Util.telescope("find_files", { hidden = true })()
+            LazyVim.pick("find_files", { hidden = true })()
           end,
           ["<C-Down>"] = function(...)
             return require("telescope.actions").cycle_history_next(...)
